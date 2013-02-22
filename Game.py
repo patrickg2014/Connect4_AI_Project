@@ -20,6 +20,8 @@ while(True):
 	inputt = int(raw_input())
 	dropMarker(b, inputt)
 	ai.printBoard(b)
+	print("0 1 2 3 4 5 6")
 	print "Computer, Make a move"
 	ai.makeMove(b)
 	ai.printBoard(b)
+	print("0 1 2 3 4 5 6")
