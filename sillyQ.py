@@ -12,7 +12,7 @@ class sampleAI(AIClass.AI):
 			if(lastMove == 0 or lastMove == -1):
 				self.dropMarker(board, 0)
 			else:
-				self.dropMarker(board, random.randin(0,6))
+				self.dropMarker(board, random.randint(0,6))
 		self.prevBoard = copy.deepcopy(board)
 	def findLastMove(self, board):
 		self.printBoard(board)
