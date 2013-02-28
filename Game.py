@@ -15,13 +15,26 @@ ai = silly.sampleAI("bill","x")
 b = [["_","_","_","_","_","_"],["_","_","_","_","_","_"],["_","_","_","_","_","_"],["_","_","_","_","_","_"],["_","_","_","_","_","_",],["_","_","_","_","_","_"],["_","_","_","_","_","_"]]
 print "Play Connect 4"
 
-while(True):
+won = False
+ai.printBoard(b)
+while not won:
 	print "Player, Please make a move"
-	inputt = int(raw_input())
+	valid = False
+	while not valid:
+		tempInputt = raw_input()
+		try:
+			inputt = int(tempInputt)
+			if (inputt < 6):
+				valid = True
+			elif (inputt > 6):
+				print "That column is not in the board, please enter a number between 0 and 6."
+		except:
+			print "Invalid input, please enter a number between 0 and 6."
+		else:
+			if len(tempInputt) != 1:
+				print "please enter only 1 digit."
 	dropMarker(b, inputt)
 	ai.printBoard(b)
-	print("0 1 2 3 4 5 6")
 	print "Computer, Make a move"
 	ai.makeMove(b)
 	ai.printBoard(b)
-	print("0 1 2 3 4 5 6")
