@@ -12,6 +12,7 @@ class AI:
 				j += 1	
 			print(temp)
 			i += 1
+		print ("0 1 2 3 4 5 6")
 	def makeMove(self, board):
 		result = self.dropMarker(board,0)
 		return result
