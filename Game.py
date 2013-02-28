@@ -24,7 +24,7 @@ while not won:
 		tempInputt = raw_input()
 		try:
 			inputt = int(tempInputt)
-			if (inputt < 6):
+			if (inputt <= 6):
 				valid = True
 			elif (inputt > 6):
 				print "That column is not in the board, please enter a number between 0 and 6."
