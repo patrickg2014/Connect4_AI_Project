@@ -41,7 +41,7 @@ def checkWin(board):
 					return checkResult
 	return checkResult
 				
-def pieceCheck(board, piece, direction,y,x):
+def pieceCheck(board, piece, direction,x,y):
 	xMod = 0
 	yMod = 0
 	distance = 1
@@ -74,17 +74,17 @@ def pieceCheck(board, piece, direction,y,x):
 		xMod = -1
 	while not checked:
 		if direction == 'up':
-			if y+(yMod*distance) < 0:
-				checked = True
-		elif direction == 'upLeft':
-			if y+(yMod*distance) < 0:
-				checked = True
 			if x+(xMod*distance) < 0:
 				checked = True
-		elif direction == 'upRight':
+		elif direction == 'upLeft':
+			if x+(xMod*distance) < 0:
+				checked = True
 			if y+(yMod*distance) < 0:
 				checked = True
-			if x+(xMod*distance) > 6:
+		elif direction == 'upRight':
+			if x+(xMod*distance) < 0:
+				checked = True
+			if y+(yMod*distance) > 5:
 				checked = True
 		elif direction == 'right':
 			if x+(xMod*distance) > 6:
