@@ -48,10 +48,6 @@ def pieceCheck(board, piece, direction,x,y):
 	checked = False
 	winnerFound = False
 	winner = None
-	if piece == 'x':
-		candidate = ai.AIname
-	elif piece == 'o':
-		candidate = "You"
 	if direction == 'up':
 		yMod = -1
 	elif direction == 'upRight':
@@ -73,41 +69,17 @@ def pieceCheck(board, piece, direction,x,y):
 		yMod = -1
 		xMod = -1
 	while not checked:
-		if direction == 'up':
-			if x+(xMod*distance) < 0:
-				checked = True
-		elif direction == 'upLeft':
-			if x+(xMod*distance) < 0:
-				checked = True
-			if y+(yMod*distance) < 0:
-				checked = True
-		elif direction == 'upRight':
-			if x+(xMod*distance) < 0:
-				checked = True
-			if y+(yMod*distance) > 5:
-				checked = True
-		elif direction == 'right':
-			if x+(xMod*distance) > 6:
-				checked = True		
-		elif direction == 'downRight':
-			if x+(xMod*distance) > 6:
-				checked = True
-			if y+(yMod*distance) > 5:
-				checked = True
-		elif direction == 'left':
-			if x+(xMod*distance) < 0:
-				checked = True
-		elif direction == 'downLeft':
-			if y+(yMod*distance) > 5:
-				checked = True
-			if x+(xMod*distance) < 0:
-				checked = True
-		elif direction == 'down':
-			if y+(yMod*distance) > 5:
-				checked = True
-		if board[y+(yMod*distance)][x+(xMod*distance)] != piece:
+		if y+(yMod*distance) < 0:
 			checked = True
-		elif board[y+(yMod*distance)][x+(xMod*distance)] == piece:
+		if x+(xMod*distance) < 0:
+			checked = True
+		if x+(xMod*distance) > 6:
+			checked = True
+		if y+(yMod*distance) > 5:
+			checked = True
+		elif board[x+(xMod*distance)][y+(yMod*distance)] != piece:
+			checked = True
+		elif board[x+(xMod*distance)][y+(yMod*distance)] == piece:
 			distance+=1
 			if distance == 4:
 				winnerFound = True
