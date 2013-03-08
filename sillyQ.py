@@ -5,6 +5,8 @@ import random
 class sampleAI(AIClass.AI):
 	prevBoard = ""
 	def makeMove(self, board):
+		winPositions = findWinSpots(board,'computer')
+		riskPositions = findWinSpots(board,'player')
 		if(self.prevBoard == ""):
 			self.dropMarker(board,random.randint(0,6))
 		else:
@@ -26,44 +28,49 @@ class sampleAI(AIClass.AI):
 				j += 1
 			i += 1
 		return -1
-	def findWinSpots(self,board):
+	def findWinSpots(self,board,player):
 		checkResult = None
+		riskSpots = []
 		for column in range (6):
 			for row in range(5):
-				if board[column][row] != '_':
-					checkResult = triSpots(board,board[column][row], 'up',column,row)
+				if board[column][row] == '_':
+					checkResult = triSpots(board,player,'up',column,row)
 					if checkResult != None:
-						return checkResult
-					checkResult = triSpots(board,board[column][row],'upRight',column,row)
+						riskSpots.add(checkResult)
+					checkResult = triSpots(board,player,'upRight',column,row)
 					if checkResult != None:
-						return checkResult
-					checkResult = triSpots(board,board[column][row],'right',column,row)
+						riskSpots.add(checkResult)
+					checkResult = triSpots(board,player,'right',column,row)
 					if checkResult != None:
-						return checkResult
-					checkResult = triSpots(board,board[column][row],'downRight',column,row)
+						riskSpots.add(checkResult)
+					checkResult = triSpots(board,player,'downRight',column,row)
 					if checkResult != None:
-						return checkResult
-					checkResult = triSpots(board,board[column][row],'down',column,row)
+						riskSpots.add(checkResult)
+					checkResult = triSpots(board,player,'down',column,row)
 					if checkResult != None:
-						return checkResult
-					checkResult = triSpots(board,board[column][row],'downLeft',column,row)
+						riskSpots.add(checkResult)
+					checkResult = triSpots(board,player,'downLeft',column,row)
 					if checkResult != None:
-						return checkResult
-					checkResult = triSpots(board,board[column][row],'left',column,row)
+						riskSpots.add(checkResult)
+					checkResult = triSpots(board,player,'left',column,row)
 					if checkResult != None:
-						return checkResult
-					checkResult = triSpots(board,board[column][row],'upLeft',column,row)
+						riskSpots.add(checkResult)
+					checkResult = triSpots(board,player,'upLeft',column,row)
 					if checkResult != None:
-						return checkResult
-		return checkResult	
+						riskSpots.add(checkResult)
+		return riskSpots	
 	
-	def triSpots(self,board,pos,direction,x,y):
+	def triSpots(self,board,target,direction,x,y):
 		xMod = 0
 		yMod = 0
 		distance = 1
 		checked = False
 		riskFound = False
 		risk = None
+		if target == 'player':
+			piece = 'o'
+		elif target == 'computer':
+			piece = 'x'
 		if direction == 'up':
 			yMod = -1
 		elif direction == 'upRight':
@@ -100,9 +107,4 @@ class sampleAI(AIClass.AI):
 				if distance == 3:
 					riskFound = True
 					checked = True
-		if winnerFound == True:
-			if piece == 'x':
-				risk = 'computer'
-			elif piece == 'o':
-				risk = 'player'
-		return risk					
+		return (x,y)					
