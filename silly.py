@@ -14,8 +14,6 @@ class sampleAI(AIClass.AI):
 				self.dropMarker(board, lastMove - 1)
 		self.prevBoard = copy.deepcopy(board)
 	def findLastMove(self, board):
-		self.printBoard(board)
-		self.printBoard(self.prevBoard)
 		i = 0
 		while(i<6):
 			j = 0
