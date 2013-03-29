@@ -1,5 +1,5 @@
 import AIClass
-import silly
+import toTheLeft
 
 def dropMarker(board, x):
 		temp = highestY(board,x)
@@ -91,7 +91,7 @@ def pieceCheck(board, piece, direction,x,y):
 			winner = 'player'
 	return winner
 		
-ai = silly.sampleAI("Bill","x")
+ai = toTheLeft.sampleAI("Bill","x")
 b = [["_","_","_","_","_","_"],["_","_","_","_","_","_"],["_","_","_","_","_","_"],["_","_","_","_","_","_"],["_","_","_","_","_","_",],["_","_","_","_","_","_"],["_","_","_","_","_","_"]]
 print "Play Connect 4"
 
