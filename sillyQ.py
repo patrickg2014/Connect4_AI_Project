@@ -8,13 +8,17 @@ class sampleAI(AIClass.AI):
 		winPositions = self.findWinSpots(board,'computer')
 		riskPositions = self.findWinSpots(board,'player')
 		for position in winPositions:
-			if board[position[0]][position[1]+1] == '_':
-				if board[position[0]][position[1]+2] != '_':
-					winPositions.remove(position)
+			if position [1] < 5:
+				if board[position[0]][position[1]+1] == '_':
+					if position [1] < 4:
+						if board[position[0]][position[1]+2] != '_':
+							winPositions.remove(position)
 		for pos in riskPostions:
-			if board[pos[0]][pos[1]+1] == '_':
-				if board[position[0]][position[1]+2] != '_':
-					riskPositions.remove(position)
+			if position [1] <5:
+				if board[pos[0]][pos[1]+1] == '_':
+					if position [1] < 4:
+						if board[position[0]][position[1]+2] != '_':
+							riskPositions.remove(position)
 		if(self.prevBoard == ""):
 			self.dropMarker(board,random.randint(0,6))
 		else:
