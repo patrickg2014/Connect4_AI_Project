@@ -1,5 +1,5 @@
 import AIClass
-import toTheLeft
+import sillyQ
 
 def dropMarker(board, x):
 		temp = highestY(board,x)
@@ -21,6 +21,7 @@ def checkWin(board):
 				checkResult = pieceCheck(board,board[column][row],'upRight',column,row)
 				if checkResult != None:
 					return checkResult
+				#right doesn't seem to be checking properly, could be left#
 				checkResult = pieceCheck(board,board[column][row],'right',column,row)
 				if checkResult != None:
 					return checkResult
@@ -91,7 +92,7 @@ def pieceCheck(board, piece, direction,x,y):
 			winner = 'player'
 	return winner
 		
-ai = toTheLeft.sampleAI("Bill","x")
+ai = sillyQ.sampleAI("Bill","x")
 b = [["_","_","_","_","_","_"],["_","_","_","_","_","_"],["_","_","_","_","_","_"],["_","_","_","_","_","_"],["_","_","_","_","_","_",],["_","_","_","_","_","_"],["_","_","_","_","_","_"]]
 print "Play Connect 4"
 

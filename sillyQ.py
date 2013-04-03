@@ -13,12 +13,12 @@ class sampleAI(AIClass.AI):
 					if position [1] < 4:
 						if board[position[0]][position[1]+2] != '_':
 							winPositions.remove(position)
-		for pos in riskPostions:
-			if position [1] <5:
+		for pos in riskPositions:
+			if pos [1] < 5:
 				if board[pos[0]][pos[1]+1] == '_':
-					if position [1] < 4:
-						if board[position[0]][position[1]+2] != '_':
-							riskPositions.remove(position)
+					if pos [1] < 4:
+						if board[pos[0]][pos[1]+2] != '_':
+							riskPositions.remove(pos)
 		if(self.prevBoard == ""):
 			self.dropMarker(board,random.randint(0,6))
 		else:
@@ -28,7 +28,7 @@ class sampleAI(AIClass.AI):
 			elif winPositions == [] and riskPositions == []:
 				self.dropMarker(board, random.randint(0,6))
 			elif winPositions != []:
-				self.dropMarker(board, winposition[0][0])
+				self.dropMarker(board, winPositions[0][0])
 			else:
 				self.dropMarker(board, riskPosition[0][0])
 		self.prevBoard = copy.deepcopy(board)
