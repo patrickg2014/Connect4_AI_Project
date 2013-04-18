@@ -70,13 +70,7 @@ def pieceCheck(board, piece, direction,x,y):
 		yMod = -1
 		xMod = -1
 	while not checked:
-		if y+(yMod*distance) < 0:
-			checked = True
-		if x+(xMod*distance) < 0:
-			checked = True
-		if x+(xMod*distance) > 6:
-			checked = True
-		if y+(yMod*distance) > 5:
+		if y+(yMod*distance) < 0 or x+(xMod*distance) < 0 or x+(xMod*distance) > 6 or y+(yMod*distance) > 5:
 			checked = True
 		elif board[x+(xMod*distance)][y+(yMod*distance)] != piece:
 			checked = True
@@ -102,11 +96,14 @@ while not won:
 	print "Player, Please make a move"
 	validInput = False
 	while not validInput:
+		#Add in something that prevents placing in full columns
 		tempInputt = raw_input()
 		try:
 			inputt = int(tempInputt)
 			if (inputt <= 6):
 				validInput = True
+				if highestY(b, inputt) == -1:
+					print "please place in a column that isn't full."				
 			elif (inputt > 6):
 				print "That column is not in the board, please enter a number between 0 and 6."
 		except:
@@ -121,8 +118,10 @@ while not won:
 		won = True
 		if candidate == 'computer':
 			print ai.AIname + " has won! Better luck next time."
+			break
 		elif candidate == 'player':
 			print "Congratulations! you have beaten " + ai.AIname + " in Connect 4."
+			break
 	print "Computer, Make a move"
 	ai.makeMove(b)
 	ai.printBoard(b)
@@ -133,3 +132,4 @@ while not won:
 			print ai.AIname + " has won! Better luck next time."
 		elif candidate == 'player':
 			print "Congratulations! you have beaten " + ai.AIname + " in Connect 4."
+print "done"

@@ -1,8 +1,17 @@
 import AIClass
 import copy
 import random
+random.seed()
 
 class sampleAI(AIClass.AI):
+	def checkFull(board, x):
+			i = 5
+			while(board[x][i] != "_" and i >= 0):
+				i -= 1
+			if i == -1:
+				return True
+			else:
+				return False 	
 	prevBoard = ""
 	def makeMove(self, board):
 		winPositions = self.findWinSpots(board,'computer')
@@ -21,16 +30,31 @@ class sampleAI(AIClass.AI):
 							riskPositions.remove(pos)
 		if(self.prevBoard == ""):
 			self.dropMarker(board,random.randint(0,6))
+			print "foobar"
 		else:
+			valid = False
+			while not valid:
+				randSpot = random.randint(0,6)
+				stat = checkFull(board,randSpot)
+				if stat:
+					valid = True
 			lastMove = self.findLastMove(board)
 			if(lastMove == 0 or lastMove == -1):
 				self.dropMarker(board, 0)
 			elif winPositions == [] and riskPositions == []:
 				self.dropMarker(board, random.randint(0,6))
 			elif winPositions != []:
-				self.dropMarker(board, winPositions[0][0])
-			else:
-				self.dropMarker(board, riskPosition[0][0])
+				stat = checkFull(board, winPositions[0][0])
+				if not stat:
+					self.dropMarker(board, winPositions[0][0])
+				else:
+					self.dropMarker(board, randSpot)
+			elif riskPositions != []:
+				stat = checkFull(board, riskPositions[0][0])
+				if not stat:
+					self.dropMarker(board, riskPositions[0][0])
+				else:
+					self.dropMarker(board, randSpot)
 		self.prevBoard = copy.deepcopy(board)
 	def findLastMove(self, board):
 		self.printBoard(board)
@@ -108,13 +132,7 @@ class sampleAI(AIClass.AI):
 			yMod = -1
 			xMod = -1
 		while not checked:
-			if y+(yMod*distance) < 0:
-				checked = True
-			if x+(xMod*distance) < 0:
-				checked = True
-			if x+(xMod*distance) > 6:
-				checked = True
-			if y+(yMod*distance) > 5:
+			if y+(yMod*distance) < 0 or x+(xMod*distance) < 0 or x+(xMod*distance) > 6 or y+(yMod*distance) > 5:
 				checked = True
 			elif board[x+(xMod*distance)][y+(yMod*distance)] != piece:
 				checked = True
@@ -123,4 +141,4 @@ class sampleAI(AIClass.AI):
 				if distance == 3:
 					riskFound = True
 					checked = True
-		return (x,y)					
+		return (x,y)
